@@ -12,29 +12,29 @@
 
 /**
  * v_printf - performs the print function in a formatted way
- * @fmt: first argument, the format
+ * @format: first argument, the format
  * @args: second argument, the list of argument variables
  *
  * Return: void
  */
 
-void v_printf(const char *fmt, va_list args)
+void v_printf(const char *format, va_list args)
 {
 	int state = 0, is_long = 0, can_reset = 1;
 	char number_buffer[65];
 
-	while (*fmt)
+	while (*format)
 	{
 		if (state == 0)
 		{
-			if (*fmt == '%')
+			if (*format == '%')
 				state = 1;
 			else
-				putchar(*fmt);
+				putchar(*format);
 		}
 		else if (state == 1)
 		{
-			switch (*fmt)
+			switch (*format)
 			{
 				case 'c':
 					{
@@ -52,33 +52,33 @@ void v_printf(const char *fmt, va_list args)
 						break;
 					}
 			}
-			fmt++;
+			format++;
 		}
 	}
 }
 
 /**
  * _printf - the real printing function
- * @fmt: first argument
+ * @format: first argument
  * @...: ellipses
  *
  * Return: void
  */
 
-int _printf(const char *fmt, ...)
+int _printf(const char *format, ...)
 {
 	va_list args;
 
-	va_start(args, fmt);
-	v_printf(fmt, args);
+	va_start(args, format);
+	v_printf(format, args);
 	va_end(args);
 	int i = 0, j = 0;
 
-	while (*fmt++)
+	while (*format++)
 	{
-		if (*fmt == '%')
+		if (*format == '%')
 		{
-			if (*fmt == *(fmt + 1))
+			if (*format == *(format + 1))
 			{
 				j++;
 			}
